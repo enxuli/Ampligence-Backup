@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -28,10 +29,38 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Zenject">
+      <HintPath>..\..\..\Desktop\Ampligence Workshop\Zenject.dll</HintPath>
+    </Reference>
+    <Reference Include="Zenject-tests">
+      <HintPath>..\..\..\Desktop\Ampligence Workshop\Zenject-tests.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\Desktop\Ampligence Workshop\unityengine\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
+    <Compile Include="Rectangle3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTesting\BindingInstaller.cs" />
+    <Compile Include="UnitTesting\Tester.cs" />
+    <Compile Include="UnitTesting\TesterInstaller.cs" />
+    <Compile Include="UnitTesting\UnitTestBase.cs" />
+    <Compile Include="Mapping\MappingTransform.cs" />
+    <Compile Include="IRectangle3D.cs" />
+    <Compile Include="Mapping\IMappingTransform.cs" />
+    <Compile Include="IVector.cs" />
+    <Compile Include="IRectangle2D.cs" />
+    <Compile Include="IValueChangeable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapping\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

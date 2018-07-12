@@ -1,9 +1,9 @@
 ﻿using System;
 namespace AmpligenceBackup.Mapping
 {
-    public class MappingTransfrom
+    public class MappingTransform : IMappingTransform
     {
-        public MappingTransfrom()
+        public MappingTransform()
         {
         }
     }

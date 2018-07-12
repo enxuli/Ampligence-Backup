@@ -1,78 +1,58 @@
 ﻿using NUnit.Framework;
 using System;
 using Zenject;
-using HW2.DI;
-namespace HW2.UnitTesting
+using UnityEngine;
+using System.Collections;
+using AmpligenceBackup.Mapping;
+
+namespace AmpligenceBackup.UnitTesting
 {
     [TestFixture]
-    public class TesterDI : UnitTestBase 
+    public class Tester : UnitTestBase 
     {
+
         protected override void SetInstallers()
         {
-            installers.Add(new TesterDIInstaller());
+            installers.Add(new TesterInstaller());
         }
 
         [Inject]
-        IOpener _opener;
-
-        [Inject(Id ="HouseWithKey")]
-        IHouseDI _houseWithKey;
-
-        [Inject(Id = "HouseWithPwd")]
-        IHouseDI _houseWithPwd;
+        IRectangle2D _rectangle2D;
 
         [Inject]
-        IKeyholdDI _keyhold;
+        IRectangle3D _rectangle3D;
 
         [Inject]
-        IKeyDI _key;
+        IMappingTransform _mapping;
+
+        [Inject]
+        IVector _tmp;
+
+        [Inject(Id ="DestinationForTranslate")]
+        IVector _destination;
+
+        [Inject(Id = "DeltaForTranslate")]
+        IVector _delta;
+
+        [Inject]
+        Quaternion _quaternion;
+
+        [Inject(Id = "ScaleLocalX")]
+        float _scaleLocalX;
+
+        [Inject(Id = "ScaleLocalY")]
+        float _scaleLocalY;
 
 
         [Test]
-        public void CheckOpenMethod()
+        public void CheckMap()
         {
-            Assert.AreEqual(_opener.Key.Index, 1);
-            Assert.AreEqual(_opener.Pwd, "12345");
-        }
+            _rectangle3D = _mapping.Map(_rectangle2D);
 
-        [Test]
-        public void CheckHouse()
-        {
-            Assert.AreNotSame(_houseWithKey, _houseWithPwd);
-        }
-
-        [Test]
-        public void CheckDoor()
-        {
-            Assert.AreNotSame(_houseWithKey.Door, _houseWithPwd.Door);
-        }
-
-        [Test]
-        public void CheckKnob()
-        {
-            Assert.AreNotSame(_houseWithKey.Door.Knob, _houseWithPwd.Door.Knob);
-            Assert.AreSame(_keyhold, _houseWithKey.Door.Knob.Keyhold);//there was a bug here
+            Assert.IsTrue(_isrectangle);
 
         }
 
-        [Test]
-        public void CheckKnobPwd()
-        {
-            Boolean _isPwdOpened = _houseWithPwd.Door.Knob.Open(_opener); 
-            Assert.True(_isPwdOpened);
-        }
 
-        [Test]
-        public void CheckKnobKey()
-        {
-            Boolean _isKeyOpened = _houseWithKey.Door.Knob.Open(_opener);
-            Assert.True(_isKeyOpened);
-        }
-        [Test]
-        public void CheckKeyhold()
-        {
-            Boolean _isOpened = _keyhold.TurnandOpen(_key);
-            Assert.True(_isOpened);
-        }
     }
 }

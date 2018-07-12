@@ -1,9 +1,9 @@
 ﻿using System;
 namespace AmpligenceBackup
 {
-    public class MyClass
+    public class Rectangle3D : IRectangle3D
     {
-        public MyClass()
+        public Rectangle3D()
         {
         }
     }
