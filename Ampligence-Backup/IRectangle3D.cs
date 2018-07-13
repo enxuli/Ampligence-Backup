@@ -8,8 +8,8 @@
         IVector leftDown { get; }
         IVector rightDown { get; }
 
-        float width { get; set; } //center fixed set
-        float height { get; set; } //center fixed set
+        float width { get; } 
+        float height { get; } 
         float area { get; }
     }
 }
